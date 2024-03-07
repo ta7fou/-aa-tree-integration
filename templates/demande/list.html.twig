@@ -1,0 +1,42 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Demandes List{% endblock %}
+
+
+
+
+{% block body %}
+    <table class="demandes-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>User Email</th>
+                <th>Sujet</th>
+                <th>Details</th>
+                <th>Animal ID</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for demande in demandes %}
+                <tr>
+                    <td>{{ demande.id }}</td>
+                    <td>{{ demande.idUser }}</td>
+                    <td>{{ demande.email }}</td>
+                    <td>{{ demande.sujet }}</td>
+                    <td>{{ demande.details }}</td>
+                    <td>{{ demande.animalId }}</td>
+                    <td class="demandes-actions">
+                        <form action="{{ path('validate_demande', { 'id': demande.id }) }}" method="post">
+                            <button type="submit">Validate</button>
+                        </form>
+                        <form action="{{ path('refuse_demande', { 'id': demande.id }) }}" method="post">
+                            <button type="submit">Refuse</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

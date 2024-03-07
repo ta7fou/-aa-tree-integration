@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="contact-from-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="form-title">
+                    <h2>Submit Adoption Request</h2>
+                    <p>Please provide your information and details about the adoption request.</p>
+                </div>
+                <div id="form_status"></div>
+                <div class="contact-form">
+                    {{ form_start(form) }}
+                    
+                       <button type="submit">Submit</button> 
+                    {{ form_end(form) }}
+                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+          <      <div class="contact-form-wrap">
+                    <div class="contact-form-box">
+                        <h4><i class="fas fa-address-book"></i> Contact</h4>
+                        <p>Phone: +00 111 222 3333 <br> Email: support@LFL.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+{% endblock %}
+

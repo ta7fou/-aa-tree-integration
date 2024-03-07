@@ -1,0 +1,37 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Add Product</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {{ form_start(form, {'attr': {'class': 'my-4', 'novalidate': 'novalidate'}}) }}
+            <div class="form-group">
+                {{ form_label(form.image, 'Image', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.nom, 'Name', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.statut, 'Status', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                {{ form_widget(form.statut, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.priu, 'Price', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                {{ form_widget(form.priu, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.priu) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.quantity, 'Quantity', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                {{ form_widget(form.quantity, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.quantity) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+app_home:
+    path: /home
+    controller: App\Controller\HomeController::index
+
+animal_new:
+    path: admin/animals/new
+    controller: App\Controller\AnimalController::new
+
+edit_animal:
+    path: animals/{id}/edit
+    controller: App\Controller\AnimalsController::edit
+    methods: ['GET']
+
+remove_animal:
+    path: animals/remove/{id}
+    controller: App\Controller\AnimalsController::delete
+
+app_demande:
+    path: /demande/{animalId}
+    controller: App\Controller\DemandeController::demande
+
+edit_demande:
+    path: /demandes/{id}/edit
+    controller: App\Controller\DemandeController::edit
+
+demande:
+    path: /demandes/{userId}
+    controller: 'App\Controller\DemandeController::showDemandes'

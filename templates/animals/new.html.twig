@@ -1,0 +1,21 @@
+
+{% extends 'baseBack.html.twig' %}
+{% block body %}
+    <h1>Add New Animal</h1>
+
+
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.espece) }}
+        {{ form_row(form.age) }}
+        {{ form_row(form.sexe) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.image) }}
+        <button type="submit">Submit</button>
+        {{ form_end(form) }}
+  
+{% endblock %}
+
+
+  
+  

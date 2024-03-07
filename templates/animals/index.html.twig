@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<!-- Update the href attribute to include the userId parameter -->
+<a href="{{ path('demandes', { 'userId': app.user.id }) }}" class="btn btn-primary">View Your Demandes</a>
+
+    <!-- Animal Section -->
+    <div class="animal-section mt-150 mb-150">
+        <div class="container">
+
+            <!-- Animal List -->
+            <div class="row animal-lists">
+                {% for animal in pagination %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="{{ asset('img/animals/' ~ animal.image) }}" alt="{{ animal.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ animal.name }}</h5>
+                                <p class="card-text">ID: {{ animal.id }}</p>
+                                <p class="card-text">Age: {{ animal.age }}</p>
+                                <p class="card-text">Sex: {{ animal.sexe }}</p>
+                                <p class="card-text">Species: {{ animal.espece }}</p>
+                                <p class="card-text">Description: {{ animal.description }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ path('app_demande', { 'animalId': animal.id }) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Make a demande for adoption"><i class="fas fa-paw"></i> Make a demande</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- End Animal List --
+            <!-- Pagination -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="pagination-wrap">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+            <!-- End Pagination -->
+
+        </div>
+    </div>
+    <!-- End Animal Section -->
+{% endblock %}
+
+
+
+
+    

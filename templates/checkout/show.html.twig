@@ -1,0 +1,33 @@
+{% extends 'baseBack.html.twig' %}
+{% block body %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Telephone</th>
+            <th>prix Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for f in facture %}
+        <tr>
+            <td>{{ f.id }}</td>
+            <td>{{ f.name }}</td>
+            <td>{{ f.email }}</td>
+            <td>{{ f.address }}</td>
+            <td>{{ f.tel }}</td>
+            <td>{{ f.prixtotal }}</td>
+            <td>
+                <a href="{{ path('edit_facture', {'id': f.id}) }}" class="btn btn-sm btn-primary">Edit</a>
+                {% include 'checkout/delete.html.twig' %}
+                <a class="btn btn-sm btn-primary" href="{{ path('sms') }}">Envoyer un SMS</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

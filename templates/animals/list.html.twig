@@ -1,0 +1,66 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Animals List{% endblock %}
+
+{% block body %}
+    <h1>Animals List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>Species</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for animal in animals %}
+                <tr>
+                    <td>{{ animal.id }}</td>
+                    <td>{{ animal.name }}</td>
+                    <td>{{ animal.age }}</td>
+                    <td>{{ animal.sexe }}</td>
+                    <td>{{ animal.espece }}</td>
+                    <td>{{ animal.description }}</td>
+                    <td>
+                        <a href="{{ path('edit_animal', { 'id': animal.id }) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{{ path('remove_animal', { 'id': animal.id }) }}" class="btn btn-sm btn-danger">Delete</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function removeAnimal(animalId) {
+            // Construct the URL for the remove route
+            var removeRoute = "{{ path('remove_animal', { 'id': 'ANIMAL_ID' }) }}".replace('ANIMAL_ID', animalId);
+
+            // Create a new form element
+            var form = document.createElement("form");
+            form.setAttribute("method", "POST");
+            form.setAttribute("action", removeRoute);
+
+            // Create a hidden input field for the animal ID
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "id");
+            hiddenField.setAttribute("value", animalId);
+
+            // Append the hidden field to the form
+            form.appendChild(hiddenField);
+
+            // Append the form to the document body
+            document.body.appendChild(form);
+
+            // Submit the form
+            form.submit();
+        }
+    </script>
+{% endblock %}

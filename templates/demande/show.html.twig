@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}<h1>Demandes for User ID: {{ userId }}</h1>{% endblock %}
+
+{% block body %}
+    <div class="demande-list">
+        {% if demandes is not empty %}
+            <ul>
+                {% for demande in demandes %}
+                    <li>
+                        <strong>Demande ID:</strong> {{ demande.id }}<br>
+                        <strong>Sujet:</strong> {{ demande.sujet }}<br>
+                        <strong>Details:</strong> {{ demande.details }}<br>
+                        {# Button to edit demande #}
+                        <a href="{{ path('edit_demande', {'id': demande.id}) }}" class="btn btn-primary">Edit</a>
+                        {# Button to delete demande (with confirmation) #}
+                        <form method="post" action="{{ path('remove_demande', {'id': demande.id}) }}" style="display: inline-block;">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this demande?')">Delete</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No demandes found for User ID: {{ userId }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+
+
+    

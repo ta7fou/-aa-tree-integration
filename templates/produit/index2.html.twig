@@ -1,0 +1,33 @@
+{% extends 'baseBack.html.twig' %}
+{% block body %}
+<div class="container mt-5">
+			<div class="row product-lists">
+
+<div class="col-lg-2 col-md-2 text-center strawberry">
+			{% for p in produit %}
+				
+					<div class="single-product-item">
+						<div class="product-image">
+							<img src="{{ asset('img/products/' ~ p.image) }}" alt="{{ p.nom }}">
+						</div>
+						<h3>{{p.nom}}</h3>
+						<p class="product-price"><span>{{p.priu}} TND</span></p>
+						<p class="product-statut"><span>{{p.statut}}</span></p>
+						<a href="{{ path('edit_produit', {'id': p.id}) }}" class="btn btn-sm btn-primary">Edit</a>
+                {% include 'produit/delete.html.twig' %}
+					             
+					</div>
+				</div>
+				{% endfor %}
+				
+				
+				
+				
+				
+			</div>
+
+			
+		</div>
+	</div>
+	<!-- end products -->
+    {% endblock %}

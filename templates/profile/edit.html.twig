@@ -1,0 +1,49 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}
+    <title>Edit Profile</title>
+{% endblock %}
+
+{% block body %}
+
+    <script>
+        window.onload = function() {
+            alert("You need to change your password.");
+        };
+    </script>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                            {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.Nom, {'attr': {'class': 'form-control', 'placeholder': 'Last Name'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.Prenom, {'attr': {'class': 'form-control', 'placeholder': 'First Name'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Address'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.dateNaissance, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.valider, {'attr': {'class': 'btn btn-primary btn-block'}}) }}
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
