@@ -1,0 +1,52 @@
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Gestion des Campagnes</h1>
+
+        {% if campagnes is empty %}
+            <p class="lead">Aucune campagne trouvée.</p>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Dates</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for campagne in campagnes %}
+                            <tr>
+                                <td>{{ campagne.nomcampagne }}</td>
+                                <td>{{ campagne.descri }}</td>
+                                <td>
+                                    <strong>Date de Début:</strong> {{ campagne.datedeb|date('Y-m-d') }}<br>
+                                    <strong>Date de Fin:</strong> {{ campagne.datefin|date('Y-m-d') }}
+                                </td>
+                                <td>
+                                    <img src="{{ asset('uploads/images/' ~ campagne.image) }}" alt="{{ campagne.nomcampagne }}" class="img-thumbnail" style="max-width: 100px;">
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Actions">
+                                        <a href="{{ path('app_campaign_edit', {'id': campagne.id}) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Modifier</a>
+                                        <a href="{{ path('remove_campaign', {'id': campagne.id}) }}" class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette campagne ?')"><i class="fas fa-trash"></i> Supprimer</a>
+                                        <a href="{{ path('app_campaign_event', {'id': campagne.id}) }}" class="btn btn-outline-info"><i class="fas fa-eye"></i> Voir Événements</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="table-secondary"><td colspan="5"></td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        
+        <div class="row mt-4">
+            <div class="col text-center">
+                <a href="{{ path('app_campaign_new') }}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Ajouter une Nouvelle Campagne</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

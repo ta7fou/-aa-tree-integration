@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Create Event</h1>
+
+    {{ form_start(form) }}
+        <div>
+            {{ form_label(form.lieu) }}
+            {{ form_widget(form.lieu) }}
+        </div>
+        <div>
+            {{ form_label(form.type) }}
+            {{ form_widget(form.type) }}
+        </div>
+        <div class="objectif-field">
+            {{ form_label(form.objectif) }}
+            {{ form_widget(form.objectif) }}
+        </div>
+        <div>
+            {{ form_label(form.nbparticipant) }}
+            {{ form_widget(form.nbparticipant) }}
+        </div>
+        <div>
+            {{ form_label(form.campagne) }}
+            {{ form_widget(form.campagne) }}
+        </div>
+        <div>
+            {{ form_widget(form.save) }}
+        </div>
+    {{ form_end(form) }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var typeField = document.querySelector('#{{ form.type.vars.id }}');
+            var objectifField = document.querySelector('.objectif-field');
+
+            function toggleObjectifField() {
+                if (typeField.value === 'Don') {
+                    objectifField.style.display = 'block';
+                } else {
+                    objectifField.style.display = 'none';
+                }
+            }
+
+            toggleObjectifField(); // Vérifie le type initial lors du chargement de la page
+
+            typeField.addEventListener('change', function () {
+                toggleObjectifField(); // Vérifie le type lorsqu'il change
+            });
+        });
+    </script>
+
+{% endblock %}
+   

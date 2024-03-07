@@ -20,30 +20,34 @@ class DemandeType extends AbstractType
             ->add('animalId', TextType::class, [
                 'disabled' => true,
                 'label' => 'Animal ID',
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('sujet', TextType::class, [
-                'label' => 'Sujet',
+                'label' => 'Subject',
+                'attr' => ['placeholder' => 'Enter the subject', 'class' => 'form-control'],
                 'constraints' => [
-                    new Length(['max' => 20]),
+                    new Length(['max' => 20, 'maxMessage' => 'Subject cannot be longer than {{ limit }} characters.']),
                     new Regex([
                         'pattern' => '/^\D+$/',
-                        'message' => 'Sujet should not contain numbers.',
+                        'message' => 'Subject should not contain numbers.',
                     ]),
                 ],
             ])
             ->add('details', TextareaType::class, [
                 'label' => 'Details',
+                'attr' => ['placeholder' => 'Enter the details', 'class' => 'form-control'],
                 'constraints' => [
-                    new Length(['min' => 20]),
+                    new Length(['min' => 20, 'minMessage' => 'Details must be at least {{ limit }} characters long.']),
                 ],
             ]);
-            
+
         // Only add the email field if the user is authenticated
         if ($options['user']) {
             $builder->add('email', TextType::class, [
                 'label' => 'Email',
                 'disabled' => true,
                 'data' => $options['user']->getEmail(),
+                'attr' => ['class' => 'form-control'],
             ]);
         }
     }

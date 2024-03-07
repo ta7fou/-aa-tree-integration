@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    .campaign-section {
+        padding: 50px 0;
+        text-align: center;
+    }
+    .form {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+</style>
+
+<div class="campaign-section mt-150 mb-150">
+    <div class="container">
+        <h1>Add New campaign</h1>
+        {{ form_start(form, {'attr': {'class': 'form'}}) }}
+            <div class="form-group">
+                {{ form_label(form.datedeb) }}
+                {{ form_widget(form.datedeb, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.datedeb) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.datefin) }}
+                {{ form_widget(form.datefin, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.datefin) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.image) }}
+                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.image) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.createur) }}
+                {{ form_widget(form.createur, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.createur) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.nomcampagne) }}
+                {{ form_widget(form.nomcampagne, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nomcampagne) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.descri) }}
+                {{ form_widget(form.descri, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.descri) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

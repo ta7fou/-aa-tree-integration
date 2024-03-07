@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Campagnes{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Gestion des Campagnes</h1>
+
+        {% if campagnes is empty %}
+            <p class="lead">Aucune campagne trouvée.</p>
+        {% else %}
+            <div class="row">
+                {% for campagne in campagnes %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{{ asset('uploads/images/' ~ campagne.image) }}" alt="{{ campagne.nomcampagne }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ campagne.nomcampagne }}</h5>
+                                <p class="card-text">{{ campagne.descri }}</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><strong>Date de Début:</strong> {{ campagne.datedeb|date('Y-m-d') }}</li>
+                                    <li class="list-group-item"><strong>Date de Fin:</strong> {{ campagne.datefin|date('Y-m-d') }}</li>
+                                </ul>
+                                <div class="mt-3">
+                                    <a href="{{ path('app_campaign_edit', {'id': campagne.id}) }}" class="btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i> Modifier</a>
+                                    <a href="{{ path('remove_campaign', {'id': campagne.id}) }}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette campagne ?')"><i class="fas fa-trash"></i> Supprimer</a>
+                                    <a href="{{ path('app_campaign_events', {'id': campagne.id}) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i> Voir Événements</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <div class="row mt-4">
+            <div class="col">
+                <a href="{{ path('app_campaign_new') }}" class="btn btn-success"><i class="fas fa-plus"></i> Ajouter une Nouvelle Campagne</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

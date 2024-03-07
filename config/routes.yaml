@@ -26,3 +26,13 @@ edit_demande:
 demande:
     path: /demandes/{userId}
     controller: 'App\Controller\DemandeController::showDemandes'
+
+participation_pdf:
+    path: '/participation/pdf'
+    controller: 'App\Controller\ParticipationController::generatePdf'
+    methods: ['GET']
+    # config/routes.yaml
+
+dashboard:
+    path: /dashboard
+    controller: App\Controller\DashController::index

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Participations de {{ app.user.username }}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa; /* Couleur de fond plus claire */
+            color: #212529; /* Couleur de texte plus sombre */
+        }
+        h1 {
+            text-align: center;
+            color: #007bff; /* Couleur bleue pour le titre */
+            border-bottom: 2px solid #007bff; /* Bordure en bas */
+            padding-bottom: 10px; /* Espacement en bas du titre */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border: 2px solid #343a40; /* Couleur de bordure plus foncée */
+        }
+        th, td {
+            border: 1px solid #343a40; /* Couleur de bordure plus foncée */
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #e2e6ea; /* Couleur de fond plus claire pour les lignes paires */
+        }
+        tr:hover {
+            background-color: #d6d8db; /* Couleur de fond plus claire au survol */
+        }
+        .quote {
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #6c757d; /* Couleur de citation plus foncée */
+        }
+        a {
+            color: #007bff; /* Couleur bleue pour les liens */
+            text-decoration: none; /* Supprimer la soulignement des liens */
+        }
+        footer {
+            position: absolute; /* Positionnement absolu pour fixer le footer en bas */
+            bottom: 0; /* Coller le footer en bas */
+            width: 100%; /* Pleine largeur */
+            text-align: center;
+            padding: 10px 0; /* Espacement intérieur */
+            background-color: #343a40; /* Couleur de fond plus foncée pour le footer */
+            color: #fff; /* Couleur de texte blanc pour le footer */
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des participations de {{ app.user.username }}</h1>
+    <div class="quote">
+        <p>« Les campagnes sont l'essence même du changement. Elles inspirent, mobilisent et transforment. »</p>
+        <p>« Rejoignez-nous dans notre mission pour un monde meilleur! »</p>
+    </div>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Nom de la campagne</th>
+            <th>Lieu de l'événement</th>
+        </tr>
+        {% for participation in participations %}
+            <tr>
+                <td>{{ participation.nom }}</td>
+                <td>{{ participation.prenom }}</td>
+                <td>{{ participation.email }}</td>
+                <td>{{ participation.campagneName }}</td>
+                <td>{{ participation.eventName }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <footer>
+        <p>&copy; 2024 LandForLife. Tous droits réservés.</p>
+        <p>Contactez-nous au <a href="tel:+21652690880">+216 52 690 880</a> ou par email à <a href="mailto:contact@LFL.com">contact@LFL.com</a></p>
+    </footer>
+</body>
+</html>

@@ -19,27 +19,37 @@ class AnimalsController extends AbstractController
 {
    
 
-#[Route('/animals', name: 'app_animals')]
-public function index(Request $request, PaginatorInterface $paginator): Response
-{
-    // Get the list of animals query
-    $query = $this->getDoctrine()->getRepository(Animals::class)->createQueryBuilder('a')
-        ->getQuery();
+    #[Route('/animals', name: 'app_animals')]
+    public function index(Request $request, PaginatorInterface $paginator): Response
+    {
+        $searchQuery = $request->query->get('q');
+        $orderBy = $request->query->get('orderBy', 'name'); // Default sorting by name
 
-    // Paginate the query
-    $animals = $paginator->paginate(
-        $query,
-        $request->query->getInt('page', 1), // Get the page parameter from the request, default to 1
-        6 // Items per page
-    );
+        $queryBuilder = $this->getDoctrine()->getRepository(Animals::class)->createQueryBuilder('a');
 
-    // Render the template and pass the paginated list of animals
-    return $this->render('animals/index.html.twig',  [
-        'pagination' => $animals,
-    ]);
+        // Apply search query if provided
+        if ($searchQuery) {
+            $queryBuilder->andWhere('a.name LIKE :searchQuery')
+                ->setParameter('searchQuery', '%'.$searchQuery.'%');
+        }
 
-   
-}
+        // Apply sorting
+        $queryBuilder->orderBy('a.'.$orderBy);
+
+        $query = $queryBuilder->getQuery();
+
+        $animals = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('animals/index.html.twig', [
+            'pagination' => $animals,
+            'searchQuery' => $searchQuery,
+            'orderBy' => $orderBy,
+        ]);
+    }
 
 
 #[Route('/animals/list', name: 'animals_list')]

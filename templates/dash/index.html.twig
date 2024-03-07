@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .chart-container {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+
+        <div class="chart-container">
+            <h2>Campagnes les plus visitées :</h2>
+            <canvas id="mostVisitedChart" width="400" height="200"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h2>Campagnes avec le plus de participations :</h2>
+            <canvas id="mostParticipatedChart" width="400" height="200"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <h2>Pourcentage de participation par campagne :</h2>
+            <canvas id="participationPieChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <script>
+        var participationPieChart = new Chart(document.getElementById('participationPieChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: [{% for campagneId, _ in participationPercentages %}"{{ campagneNames[campagneId] }}",{% endfor %}],
+                datasets: [{
+                    label: 'Pourcentage de participation',
+                    data: [{% for _, pourcentage in participationPercentages %}{{ pourcentage }},{% endfor %}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var mostVisitedChart = new Chart(document.getElementById('mostVisitedChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: [{% for campagne in mostVisitedCampagnes %}"{{ campagne.nom_campagne }}",{% endfor %}],
+                datasets: [{
+                    label: 'Visites',
+                    data: [{% for campagne in mostVisitedCampagnes %}{{ campagne.total_visites }},{% endfor %}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var mostParticipatedChart = new Chart(document.getElementById('mostParticipatedChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: [{% for campagne in mostParticipatedCampagnes %}"{{ campagne.nom_campagne }}",{% endfor %}],
+                datasets: [{
+                    label: 'Participations',
+                    data: [{% for campagne in mostParticipatedCampagnes %}{{ campagne.total_participations }},{% endfor %}],
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
