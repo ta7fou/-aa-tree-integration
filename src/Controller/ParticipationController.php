@@ -80,7 +80,7 @@ public function index(Request $request, Security $security, $id): Response
        $entityManager->persist($dash);
     $entityManager->flush();
 
-    return $this->render('participation/index.html.twig', [
+    return $this->render('participation/form.html.twig', [
         'form' => $form->createView(),
     ]);
 }

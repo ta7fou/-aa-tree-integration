@@ -20,7 +20,17 @@ class HomeController extends AbstractController
         'message' => 'Welcome to your new controller!',
     ];
 
-    return $this->render('base.html.twig', $data);
+    return $this->render('base1.html.twig', $data);
+} 
+#[Route('/home2', name: 'app_home2')]
+public function index2(): Response
+{
+// Pass any data you need to the template
+$data = [
+    'message' => 'Welcome to your new controller!',
+];
+
+return $this->render('base.html.twig', $data);
 }
 
 #[Route('/admin/back', name: 'app_home_back')]
