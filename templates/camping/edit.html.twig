@@ -1,0 +1,79 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+    
+ <!-- breadcrumb-section -->
+    <div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>C A M P I N G S</p>
+						<h1>DISCOVER OUR SPOTS</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <!-- end breadcrumb section -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    .card {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+        /* background-color: #fff; */ /* Pas nécessaire si vous voulez utiliser le fond par défaut */
+    }
+
+    .card-header {
+        background-color: #fdd835; /* Jaune */
+        color: #333; /* Pour un bon contraste avec le jaune */
+    }
+
+     .btn-primary {
+        background-color: orange;
+        border-color: orange;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+         background-color: darkorange;
+        border-color: darkorange;
+    }
+
+    /* Si vous avez besoin d'ajuster les couleurs de texte ou autre à l'intérieur de la carte */
+    .card-body, .card-footer {
+        color: #333; /* Assurez-vous que la couleur est lisible sur le fond de votre choix */
+    }
+
+    /* Pour un contraste élevé et une meilleure lisibilité, assurez-vous que le texte à l'intérieur de la carte est de couleur foncée si le fond est clair */
+</style>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center"><strong>Edit Camping</strong></h3>
+                </div>
+                <div class="card-body">
+                    <!-- Form content here -->
+                    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+                    {{ form_widget(form) }}
+                </div>
+                <div class="card-footer text-center">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ path('app_camping') }}" class="btn btn-primary">Cancel</a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+  

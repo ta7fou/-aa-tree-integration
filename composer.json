@@ -34,6 +34,7 @@
         "symfony/twilio-notifier": "5.4.*",
         "symfony/validator": "5.4.*",
         "symfony/yaml": "5.4.*",
+        "symfonycasts/reset-password-bundle": "^1.21",
         "symfonycasts/sass-bundle": "*",
         "symfonycasts/verify-email-bundle": "^1.16",
         "twbs/bootstrap": "^5.3",

@@ -1,0 +1,39 @@
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Gestion des objectifs</h1>
+
+        {% if objectifs is empty %}
+            <p class="lead">Aucun objectif trouvé.</p>
+        {% else %}
+            <div class="row">
+                {% for objectif in objectifs %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-event-item">
+                            <div class="event-thumbnail">
+                                <img src="{{ asset('img/objectif/' ~ objectif.getImageobj()) }}" alt="{{ objectif.getImageobj() }}" class="img-thumbnail" style="max-width: 100px;">
+                            </div>
+                            <div class="event-content">
+                                <ul class="event-info">
+                                    <li><strong>Type d'objectif:</strong> {{ objectif.getTypeobj() }}</li>
+                                    <li><strong>Résultat d'objectif:</strong> {{ objectif.getResultatobj() }}</li>
+                                    <!-- Add other information about the objectif here as needed -->
+                                </ul>
+                                <!-- Add your action buttons here -->
+                                <div class="action-buttons">
+                                    <a href="{{ path('edit_objectif_item', {'id': objectif.getId()}) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Modifier</a>
+                                    <a href="{{ path('remove_objectif_item', {'id': objectif.getId()}) }}" class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet objectif ?')"><i class="fas fa-trash"></i> Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="row mt-4">
+            <div class="col text-center">
+                <a href="{{ path('app_objectif_new') }}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Ajouter un nouvel objectif </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

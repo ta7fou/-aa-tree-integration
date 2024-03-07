@@ -1,0 +1,91 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p> C A M P I N G S </p>
+                    <h1> G O A L S </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    /* Ajoutez ce style pour l'espacement */
+    .container-for-objectives {
+        margin-top: 30px; /* Espace au-dessus du bloc de la liste d'objectifs */
+    }
+    
+    .objectif-lists .single-objectif-item {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        background-color: #fff; /* Arrière-plan blanc pour les cartes */
+    }
+
+    .objectif-lists .single-objectif-item:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .objectif-image img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        width: 100%;
+        height: auto;
+    }
+
+    .single-objectif-item h3, .single-objectif-item p {
+        padding: 0 15px;
+    }
+
+    .single-objectif-item h3 {
+        margin-top: 15px;
+    }
+
+      .btn-primary {
+        background-color: orange;
+        border-color: orange;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+         background-color: darkorange;
+        border-color: darkorange;
+    }
+
+    .objectif-lists .single-objectif-item .btn {
+        margin: 15px 0;
+    }
+</style>
+
+<!-- objectif List -->
+<div class="container container-for-objectives">
+    <div class="row objectif-lists">
+        {% for objectif in page %}
+        <div class="col-lg-4 col-md-6 text-center">
+            <div class="single-objectif-item">
+                <div class="objectif-image">
+                    <img src="{{asset('uploads/' ~ objectif.imageobj)}}" alt="{{objectif.imageobj}}">
+                </div>
+                <h3><p><b> Résultat : </b>{{ objectif.resultatobj }}</p></h3>
+                <p><b>Description  : </b> {{ objectif.descobj }}</p>
+            <a href="{{ path('app_partcamp', { 'id':objectif.id }) }}" class="btn btn-primary"><strong>Participate</strong></a>
+
+            <a href="{{ path('app_camping') }}" class="btn btn-primary"><strong>Cancel</strong></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+ 
+{% endblock %}
+

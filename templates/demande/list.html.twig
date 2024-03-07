@@ -2,41 +2,91 @@
 
 {% block title %}Demandes List{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            padding: 20px;
+        }
 
+        .demandes-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
+        .demandes-table th, .demandes-table td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        .demandes-actions form {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .demandes-actions button {
+            padding: 8px 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .demandes-actions button:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <table class="demandes-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>User ID</th>
-                <th>User Email</th>
-                <th>Sujet</th>
-                <th>Details</th>
-                <th>Animal ID</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for demande in demandes %}
+    <div class="container">
+        <h2 class="text-center mb-4">Demandes List</h2>
+        <table class="table table-bordered demandes-table">
+            <thead class="thead-dark">
                 <tr>
-                    <td>{{ demande.id }}</td>
-                    <td>{{ demande.idUser }}</td>
-                    <td>{{ demande.email }}</td>
-                    <td>{{ demande.sujet }}</td>
-                    <td>{{ demande.details }}</td>
-                    <td>{{ demande.animalId }}</td>
-                    <td class="demandes-actions">
-                        <form action="{{ path('validate_demande', { 'id': demande.id }) }}" method="post">
-                            <button type="submit">Validate</button>
-                        </form>
-                        <form action="{{ path('refuse_demande', { 'id': demande.id }) }}" method="post">
-                            <button type="submit">Refuse</button>
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>User ID</th>
+                    <th>User Email</th>
+                    <th>Sujet</th>
+                    <th>Details</th>
+                    <th>Animal ID</th>
+                    <th>Action</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for demande in demandes %}
+                    <tr>
+                        <td>{{ demande.id }}</td>
+                        <td>{{ demande.idUser }}</td>
+                        <td>{{ demande.email }}</td>
+                        <td>{{ demande.sujet }}</td>
+                        <td>{{ demande.details }}</td>
+                        <td>{{ demande.animalId }}</td>
+                        <td class="demandes-actions">
+                            <form action="{{ path('validate_demande', { 'id': demande.id }) }}" method="post">
+                                <button type="submit" class="btn btn-success">Validate</button>
+                            </form>
+                            <form action="{{ path('refuse_demande', { 'id': demande.id }) }}" method="post">
+                                <button type="submit" class="btn btn-danger">Refuse</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

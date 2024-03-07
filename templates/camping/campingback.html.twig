@@ -1,0 +1,61 @@
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Gestion des Campings</h1>
+
+        {% if campings is empty %}
+            <p class="lead">Aucune camping trouvée.</p>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>                          
+                          <th scope="col">imagecamp</th>
+
+                            <th scope="col">adressecamp</th>
+                            <th scope="col">prixcamp</th>
+                            <th scope="col">datedebut</th>
+                            <th scope="col">datefin</th>
+                            <th scope="col">nbpmax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for camping in campings %}
+                            <tr>
+  <td>
+                                    <img src="{{ asset('img/team/' ~ camping.imagecamp) }}" alt="{{ camping.imagecamp }}" class="img-thumbnail" style="max-width: 100px;">
+                                </td>
+                                <td>{{ camping.adressecamp }}</td>
+                                <td>{{ camping.prixcamp }}</td>
+                                <td>
+                                    {{ camping.datedebut|date('Y-m-d') }}<br>
+                                    </td>
+                                    <td>
+                                    {{ camping.datefin|date('Y-m-d') }}
+                                </td>
+                                <td>
+                                <strong> {{camping.nbpmax }}
+                                </td>
+                              
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Actions">
+                                        <a href="{{ path('edit_camping_item', {'id': camping.id}) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Modifier</a>
+                                        <a href="{{ path('remove_camping_item', {'id': camping.id}) }}" class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette camping ?')"><i class="fas fa-trash"></i> Supprimer</a>
+                                         <a href="{{ path('app_camping_objectifs', {'id': camping.id}) }}" class="btn btn-outline-info"><i class="fas fa-eye"></i> Voir Objectifs</a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="table-secondary"><td colspan="5"></td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        
+        <div class="row mt-4">
+            <div class="col text-center">
+                <a href="{{ path('app_camping_new') }}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Ajouter un nouveau camping </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar
+{% endblock %}
+
+{% block body %}
+	<br>
+	<br>
+	<br>
+	<br>
+	<main id="main" class="main">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
+
+		<div id="calendrier"></div>
+		<div>
+			{# <a href="{{ path('adminallocation') }}">Back to allocation list</a> #}
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js" integrity="sha256-YicH/8aE660iEnJtgll3vT54dJApy3XkYmqNfGVFEzA=" crossorigin="anonymous"></script>
+
+		<style>
+			#calendrier {
+				width: 80%;
+				margin: auto;
+			}
+		</style>
+
+		<!-- Make sure to include FullCalendar library in your HTML file -->
+<!-- For example, using CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/main.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/main.min.css" />
+
+<script>
+    window.onload = () => {
+        let calendarElt = document.querySelector("#calendrier");
+        let calendar = new FullCalendar.Calendar(calendarElt, {
+            initialView: 'dayGridMonth',
+            locale: 'en', // Change 'ang' to the correct language code, e.g., 'en'
+            timeZone: 'Europe/Paris',
+            headerToolbar: {
+                start: 'prev,next today',
+                center: 'title',
+                end: 'dayGridMonth timeGridWeek'
+            },
+            events: {{ data | raw }}
+        });
+
+        calendar.render();
+    }
+</script>
+
+	</main>
+{% endblock %}

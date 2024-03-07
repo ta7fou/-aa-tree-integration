@@ -1,0 +1,64 @@
+{% block body %}
+<style>
+    .breadcrumb-section {
+        background-color: #fdd835;
+        color: #333;
+        padding: 50px 0;
+    }
+
+    .breadcrumb-text {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-text p {
+        margin-bottom: 10px;
+    }
+
+    .card {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .card-header {
+        background-color: #fdd835;
+        color: #333;
+    }
+
+    .btn-primary {
+        background-color: orange;
+        border-color: orange;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: darkorange;
+        border-color: darkorange;
+    }
+</style>
+
+<div class="container mt-5">
+    <h3 class="mb-4text-center">L'objectif pour le camp du : {{ camping.adressecamp }}</h3>
+
+    {% if objectif is null %}
+        <p class="lead">Aucun objectif trouvé pour cette campagne.</p>
+    {% else %}
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+<img class="card-img-top rounded" src="{{ asset('uploads/' ~ objectif.imageobj) }}" alt="{{ objectif.imageobj }}" style="max-width: 50%; height: auto;">
+
+                <div class="card">
+                    <div class="card-body">
+                        <br></br>
+                        <p class="card-title"><strong>Type d'objectif:</strong> {{ objectif.descobj }}</p>
+                        <p class="card-text"><strong>Résultat d'objectif:</strong> {{ objectif.resultatobj }}</p>
+<a href="{{ path('app_partcamp', {'id': camping.id}) }}" class="btn btn-primary">Participate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

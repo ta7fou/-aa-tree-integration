@@ -1,0 +1,77 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+ <!-- breadcrumb-section -->
+    <div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p> C A M P I N G S </p>
+						<h1> G O A L S </h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <!-- end breadcrumb section -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    .card {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .card-header {
+        background-color: #fdd835; /* Jaune */
+        color: #333; /* Pour un bon contraste avec le jaune */
+    }
+
+    .btn-primary {
+        background-color: orange;
+        border-color: orange;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+         background-color: darkorange;
+        border-color: darkorange;
+    }
+
+    /* Personnalisation supplémentaire pour s'assurer que le formulaire s'aligne bien visuellement */
+    .form {
+        margin: 20px;
+    }
+
+</style>
+<br>
+<br>
+<br>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Edit Objectif</h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+                        {{ form_widget(form) }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+  
