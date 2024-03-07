@@ -1,0 +1,14 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+
+<!-- Main Content -->
+<div class="container">
+    <h1>Edit event </h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    {{ form_end(form) }}
+
+{% endblock %}

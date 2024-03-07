@@ -1,0 +1,38 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+
+<!-- Section des événements -->
+<div class="campaign-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            {% for event in events %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-event-item">
+                        <div class="event-thumbnail">
+                            <!-- Affichez ici l'image de l'événement si nécessaire -->
+                        </div>
+                        <div class="event-content">
+                            <ul class="event-info">
+                                <li><strong>Id Event:</strong> {{ event.id }}</li>
+                                <Li><strong>Objectif:</strong> {{ event.objectif }}</Li>
+                                <li><strong>Lieu:</strong> {{ event.lieu }}</li>
+                                <li><strong>Nombre de participants:</strong> {{ event.nbparticipant }}</li>
+                                <li><strong>Campagne:</strong> {{ event.campagne.nomcampagne }}</li>
+                            </ul>
+                            <!-- Ajoutez vos boutons d'action ici -->
+                            <div class="action-buttons">
+                                <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn btn-primary">Modifier</a>
+                                <a href="{{ path('app_event_delete', {'id': event.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Fin de la section des événements -->
+
+<!-- end event section -->
+{% endblock %}

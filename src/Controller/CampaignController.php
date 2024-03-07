@@ -80,12 +80,36 @@ class CampaignController extends AbstractController
             'currentUser' => $this->getUser(),
         ]);
     }
+    #[Route('/admin/campaign/back', name: 'app_campaign_back')]
+    public function index2(CampagneRepository $campagneRepository): Response
+    {
+        // Récupérer l'ID de l'utilisateur connecté
+    
+        // Récupérer les campagnes de l'utilisateur connecté en utilisant findByUserId
+        $campagnes = $campagneRepository->findAll();
+    
+        // Rendre le template et passer la liste des campagnes
+        return $this->render('campaignback/listecampback.html.twig', [
+            'campagnes' => $campagnes,
+        ]);
+    }
     
     
 
  
     
- 
+    #[Route('/admin/campaignb/{id}/evenement', name: 'app_campaign_evenement_back')]
+    public function showEventsByCampagnes2(Campagne $campagne, EventRepository $evenementRepository): Response
+    {
+        // Récupérer la liste des événements pour cette campagne spécifique
+        $events = $evenementRepository->findByCampagne($campagne);
+    
+        // Passer la liste des événements à la vue
+        return $this->render('event/index1.html.twig', [
+            'campagne' => $campagne,
+            'events' => $events,
+        ]);
+    }
     #[Route('/campaign/new', name: 'app_campaign_new')]
     public function new(Request $request): Response
     {
@@ -135,6 +159,7 @@ class CampaignController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
 
     #[Route('/campaign/{id}/edit', name: 'app_campaign_edit')]
     public function edit(Request $request, Campagne $campagne): Response
@@ -177,5 +202,47 @@ class CampaignController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_campaign');
+    }
+    #[Route('/admin/campaignb/{id}/edit', name: 'app_campaign_back_edit')]
+    public function edit1(Request $request, Campagne $campagne): Response
+    {
+        $form = $this->createForm(CampagneType::class, $campagne);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Enregistrez les modifications dans la base de données
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'La campagne a été mise à jour avec succès.');
+            return $this->redirectToRoute('app_mescampaign', ['id' => $campagne->getId()]);
+        }
+
+        return $this->render('campaign/edit1.html.twig', [
+            'campagne' => $campagne,
+            'form' => $form->createView(),
+        ]);
+    }
+    
+    #[Route('/admin/campaignb/remove/{id}', name: 'remove_campaign_back')]
+    public function deleteCampaign1($id, EntityManagerInterface $entityManager, CampagneRepository $campagneRepository, EventRepository $eventRepository): Response
+    {
+        $campagne = $campagneRepository->find($id);
+
+        if (!$campagne) {
+            throw $this->createNotFoundException('Campagne not found');
+        }
+
+        // Supprimer tous les événements liés à la campagne
+        $events = $eventRepository->findBy(['campagne' => $campagne]);
+        foreach ($events as $event) {
+            
+            $entityManager->remove($event);
+        }
+
+        // Supprimer la campagne
+        $entityManager->remove($campagne);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_back');
     }
 }
