@@ -58,7 +58,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('admin/editp/{id}', name: 'edit_produit')]
+    #[Route('/admin/editp/{id}', name: 'edit_produit')]
     public function edit(Request $request, Produit $produit): Response
     {
         $form = $this->createForm(ProduitType::class, $produit);
@@ -75,7 +75,7 @@ class ProduitController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('admin/remove/{id}', name: 'remove_produit')]
+    #[Route('/admin/remove/{id}', name: 'remove_produit')]
     public function delete($id, EntityManagerInterface $entityManager, ProduitRepository $produitRepository): Response
     {
         $produit = $produitRepository->find($id);   // Retrieve the animal to be removed

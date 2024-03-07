@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends 'baseBack.html.twig' %}
 
 {% block body %}
     <!-- breadcrumb-section -->
@@ -17,29 +17,23 @@
     <!-- team section -->
     <div class="mt-150">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2 text-center">
-                    <div class="section-title">
-                        <h3> O U R  <span class="orange-text">C A M P I N G S</span></h3>
-                        <p> Discover our amazing recommendations for an unbelievable camping journey</p>
-                    </div>
-                </div>
-            </div>
+            
             <div class="container">
                 <div class="row">
                     {% for camping in page %}
                         <div class="col-lg-4 col-md-6 mb-4">
-                         
                             <div class="card">
                             <img src="{{ asset('img/team/' ~ camping.imagecamp) }}" >
-                               
                                 <div class="card-body">
                                     <h5 class="card-title"><strong>AddressS Camping :</strong> {{ camping.adressecamp }}</h5>
                                     <p class="card-text"><strong>Prix camping : </strong>{{ camping.prixcamp }} DT</p>
                                     <p class="card-text"><strong>Nb personnes max :</strong> {{ camping.nbpmax }}</p>
                                     <p class="card-text"><strong>Date début : </strong>{{ camping.datedebut|date('Y-m-d') }}</p>
                                     <p class="card-text"><strong>Date fin : </strong>{{ camping.datefin|date('Y-m-d') }}</p>
-                                    <a href="{{ path('app_camping_objectif', {'id': camping.id}) }}" class="btn btn-primary">Voir objectif camp</a>
+                                    <a href="{{ path('app_objectif2', {'id': camping.id}) }}" class="btn btn-primary">Voir objectif camp</a>
+                                    <a href="{{ path('edit_camping_item', {'id': camping.id}) }}" class="btn btn-sm btn-primary">Edit</a>
+                {% include 'camping/delete.html.twig' %}
+
                                 </div>
                             </div>
                         </div>

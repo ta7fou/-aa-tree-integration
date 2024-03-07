@@ -31,9 +31,24 @@ class ObjectifController extends AbstractController
             'page' => $page,
         ]);
     }
+    #[Route('/admin/listobjectif', name: 'app_objectif2')]
+    public function index2(ObjectifRepository $objectifRepository,PaginatorInterface $paginator, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $objectifs = $objectifRepository->findAll();
+
+        $page = $paginator->paginate(
+            $objectifs,
+            $request->query->getInt('page', 1),
+            2
+        );
+        return $this->render('objectif/index2.html.twig', [
+            'objectifs' => $objectifs,
+            'page' => $page,
+        ]);
+    }
   
 
-    #[Route('/objectif/new', name: 'app_objectif_new')]
+    #[Route('/admin/objectif/new', name: 'app_objectif_new')]
     public function new(Request $request): Response
     {
         $objectifs = new Objectif();
@@ -66,7 +81,7 @@ class ObjectifController extends AbstractController
 
 
 
-    #[Route('/objectif/edit/{id}', name: 'edit_objectif_item')]
+    #[Route('/admin/objectif/edit/{id}', name: 'edit_objectif_item')]
     public function edit(Request $request, Objectif $objectifs): Response
     {
         $form = $this->createForm(ObjectifType::class, $objectifs);
@@ -102,7 +117,7 @@ class ObjectifController extends AbstractController
 
 
 
-    #[Route('/objectif/remove/{id}', name: 'remove_objectif_item')]
+    #[Route('/admin/objectif/remove/{id}', name: 'remove_objectif_item')]
     public function delete($id, EntityManagerInterface $entityManager, ObjectifRepository $objectifRepository): Response
     {
         $objectifs = $objectifRepository->find($id);   

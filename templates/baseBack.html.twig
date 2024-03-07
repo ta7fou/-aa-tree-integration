@@ -417,6 +417,33 @@
               </ul>
             </div>
           </li>
+           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="menu-icon mdi mdi-chart-line"></i>
+              <span class="menu-title">objectifs</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                   <li class="nav-item"><a class="nav-link" href={{ path('app_objectif_new' ) }}>Add objectif</a></li>
+                   <li class="nav-item"><a class="nav-link" href={{ path('app_objectif2' ) }}>list of objectifs</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="menu-icon mdi mdi-chart-line"></i>
+              <span class="menu-title">Campings</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                   <li class="nav-item"><a class="nav-link" href={{ path('app_camping_new' ) }}>Add Camping</a></li>
+                   <li class="nav-item"><a class="nav-link" href={{ path('calendrier_back_camping' ) }}>Calendar</a></li>
+                   <li class="nav-item"><a class="nav-link" href={{ path('app_camping_back' ) }}>list of Campings</a></li>
+              </ul>
+            </div>
+          </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="menu-icon mdi mdi-chart-line"></i>
@@ -470,7 +497,7 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <i class="menu-icon mdi mdi-table"></i>
-              <span class="menu-title">Tables</span>
+              <span class="menu-title"></span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="tables">

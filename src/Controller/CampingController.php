@@ -52,8 +52,29 @@ public function index(CampingRepository $campingRepository, PaginatorInterface $
         'campings' => $campings,
         'page' => $page,
     ]);}
+    #[Route('/admin/camping', name: 'app_camping_back', methods: ['GET'])]
+public function index2(CampingRepository $campingRepository, PaginatorInterface $paginator, EntityManagerInterface $entityManager, Request $request): Response
+{
+    // Query campings using the repository
+    $campings = $campingRepository->findAll();
 
-    #[Route('/camping/new', name: 'app_camping_new')]
+    // Paginate the results
+    $page = $paginator->paginate(
+        $campings,
+        $request->query->getInt('page', 1),
+        2
+    );
+    // Create the form
+        
+
+    // Handle form submission
+
+    return $this->render('camping/index2.html.twig', [
+        'campings' => $campings,
+        'page' => $page,
+    ]);}
+
+    #[Route('/admin/camping/new', name: 'app_camping_new')]
     public function new(Request $request): Response
     {
 
@@ -93,7 +114,7 @@ if ($objectif !== null) {
         ]);
     }
 
-    #[Route('/camping/{id}/edit', name: 'edit_camping_item')]
+    #[Route('/admin/camping/{id}/edit', name: 'edit_camping_item')]
     public function edit(Request $request, Camping $campings): Response
     {
         $form = $this->createForm(CampingType::class, $campings);
@@ -111,7 +132,7 @@ if ($objectif !== null) {
         ]);
     }
 
-   #[Route('/camping/{id}', name: 'app_camping_show', methods: ['GET'])]
+   #[Route('/admin/camping/{id}', name: 'app_camping_show', methods: ['GET'])]
 public function show(Camping $camping, ObjectifRepository $objectifRepository): Response
 {
     $objectif = $camping->getObjectif();
@@ -124,7 +145,7 @@ public function show(Camping $camping, ObjectifRepository $objectifRepository): 
 
 
 
-    #[Route('/camping/remove/{id}', name: 'remove_camping_item')]
+    #[Route('/admin/camping/remove/{id}', name: 'remove_camping_item')]
     public function delete($id, EntityManagerInterface $entityManager, CampingRepository $campingRepository): Response
     {
         $campings = $campingRepository->find($id);   
@@ -138,7 +159,7 @@ public function show(Camping $camping, ObjectifRepository $objectifRepository): 
 
         return $this->redirectToRoute('app_camping');
     }
-    #[Route('/calendrier', name: 'calendrier_camping', methods: ['GET'])]
+    #[Route('/admin/calendrier', name: 'calendrier_back_camping', methods: ['GET'])]
     public function calendrier(CampingRepository $campingRepository): Response
     {
         // Retrieve all camping entities
