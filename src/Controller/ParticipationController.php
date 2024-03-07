@@ -67,6 +67,10 @@ public function index(Request $request, Security $security, $id): Response
     $form->handleRequest($request);
     
     if ($form->isSubmitted() && $form->isValid()) {
+        if ($event->getNbparticipant() <= $dash->getNbParticipations()) {
+            $this->addFlash('error', 'Le nombre maximum de participants est atteint pour cet événement.');
+            return $this->redirectToRoute('app_event_show', ['id' => $id]);
+        }
         // Mettre à jour les statistiques de la campagne dans l'entité Dash
         $dash->setNbParticipations($dash->getNbParticipations() + 1);
         $entityManager->persist($participation);
